@@ -1,0 +1,114 @@
+/* Navbar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 20px;
+  overflow: hidden;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+/* Logo */
+.ecohaven {
+  margin-left: 20px;
+  margin-right: 50px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.ecohaven:hover .eco {
+  color: black;
+}
+
+.eco {
+  color: #326F40;
+}
+
+li {
+  float: left;
+  margin-top: 20px;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  color: #2a5f36;
+  text-decoration: underline;
+}
+
+.active {
+  background-color: #326F40;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 150px;
+  margin-left: 100px;
+}
+
+/* Search bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-container .input-group {
+  display: flex;
+  align-items: center;
+}
+
+.search-container .input-group input[type="search"] {
+  padding: 6px;
+  border: none;
+  font-size: 17px;
+  width: 200px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.search-container .input-group button {
+  padding: 6px 10px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.search-container .input-group button:hover {
+  background: #bababa;
+}
+
+/* Login button */
+.login-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.login-container .login-button {
+  padding: 6px 10px;
+  background: #326F40;
+  color: white;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.login-container .login-button:hover {
+  background: #2a5f36;
+}
