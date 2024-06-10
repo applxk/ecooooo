@@ -1,4 +1,4 @@
-/* client/src/components/rewardShopBack.js */
+/* client/src/components/rewardShopBack.jsx */
 
 import React from 'react';
 
