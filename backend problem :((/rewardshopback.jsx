@@ -10,4 +10,4 @@ const RewardShopBack = () => {
   );
 };
 
-export default RewardShopBack;
+export default rewardshopback;
