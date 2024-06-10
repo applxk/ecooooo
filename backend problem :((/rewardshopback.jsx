@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const RewardShopBack = () => {
+const rewardshopback = () => {
   return (
     <div>
       <h1>Hello World</h1>
