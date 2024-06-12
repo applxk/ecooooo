@@ -3,7 +3,7 @@ import { MDBFooter, MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
 export default function App() {
     return (
-        <MDBFooter bgColor='light' className='footer-container'>
+        <MDBFooter className='footer-container'>
             <MDBContainer className='mt-5'>
                 <MDBRow className='mt-3 footer-content'>
                     <MDBCol md='3' className='col1'>
@@ -58,8 +58,8 @@ export default function App() {
 
                         <h6 className='section-title'>Connect with us!</h6>
                         <p className='social'>
-                            <a href='#'><img src='./src/assets/images/facebook.png' alt='facebook'></img></a>
-                            <a href='#'><img src='./src/assets/images/instagram.png' alt='instagram'></img></a>
+                            <a href='https://www.facebook.com/MSEsingapore/' target="_blank"><img src='./src/assets/images/facebook.png' alt='facebook'></img></a>
+                            <a href='https://www.instagram.com/msesingapore/' target="_blank"><img src='./src/assets/images/instagram.png' alt='instagram'></img></a>
                         </p>
                     </MDBCol>
                 </MDBRow>
@@ -70,4 +70,3 @@ export default function App() {
         </MDBFooter>
     );
 }
-
