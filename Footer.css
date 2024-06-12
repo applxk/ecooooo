@@ -1,91 +1,65 @@
 /* Style for the footer container */
 .footer-container {
     background-color: #353535;
-    padding: 5px 0;
+    padding: 0px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 h6 {
     font-size: 20px;
     color: white;
-    margin-left: 20px;
+    margin-bottom: 30px;
+    margin-left: 10%;
 }
 
-/* Style for the footer links */
-.footer-list {
-    list-style: none;
-    padding: 0;
-    background-color: #353535;
-    margin-top: -40px;
-    margin-left: 10px;
-}
-
-.footer-list li {
-    margin-bottom: 10px;
-}
-
-.footer-list a {
-    color: white;
-    text-decoration: none;
-}
-
-.footer-list a:hover {
-    color: #326F40;
-}
-
-/* Style for the copyright text */
-.copyright-text {
-    background-color: #353535;
-    padding: 10px 0;
-    margin-left: 20px;
-    color: white;
-    font-size: 10px;
-}
-
-/* Style for the footer content
 .footer-content {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-} */
-
-/* Style for the individual columns */
-.col2,
-.col3,
-.col4 {
-    margin-right: 10px;
-    /* Add margin between columns */
-    display: inline-block;
 }
 
-.mt-3 {
-    margin-bottom: 50px;
+.col1, .col2, .col3 {
+    flex-basis: 30%;
+}
+
+/* Adjusted flex-basis for closer alignment */
+.col1, .col2 {
+    flex-basis: 25%; /* Allocating less space to each column */
+}
+
+.col1 a, .col2 a, .col3 a {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: white;
+    text-align: left;
+    margin-left: 10%;
+}
+
+.col1 a:hover, .col2 a:hover, .col3 a:hover {
+    color: #91E1A3;
+    text-decoration: underline;
 }
 
 .contact {
-    margin-left: 20px;
-    max-width: 400px;
+    text-align: left;
     font-size: 17px;
     color: white;
     margin-top: -20px;
-}
-
-.social {
-    margin-left: 20px;
-    max-width: 400px;
-    margin-top: -20px;
-}
-
-.form-group {
-    display: inline-block;
-    margin-left: 20px;
+    margin-left: 45px;
 }
 
 .newsletter-form {
     margin-top: 20px;
+    text-align: center;
 }
 
-.newsletter-form label {
-    color: white;
+.form-group {
+    display: inline-block;
+    margin: 0 auto;
+    margin-left: -5px;
 }
 
 .newsletter-form input[type="email"] {
@@ -107,5 +81,23 @@ h6 {
 }
 
 .newsletter-form button:hover {
-    background: #bababa;
+    background: #14772B;
+}
+
+.social img {
+    width: 35px;
+    margin-top: -10px;
+}
+
+.social a {
+    display: inline-block;
+}
+
+.copyright-text {
+    background-color: #353535;
+    padding: 10px 0;
+    color: white;
+    font-size: 10px;
+    margin-top: -10px;
+    margin-left: 20px;
 }
