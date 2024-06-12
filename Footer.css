@@ -20,8 +20,16 @@ h6 {
     justify-content: space-between;
 }
 
-.col1, .col2, .col3 {
-    flex-basis: 30%;
+.col1 {
+    margin-left: 30px;
+}
+
+.col2 {
+    margin-right: 350px;
+}
+
+.col3 {
+    margin-right: 100px;
 }
 
 /* Adjusted flex-basis for closer alignment */
@@ -59,7 +67,6 @@ h6 {
 .form-group {
     display: inline-block;
     margin: 0 auto;
-    margin-left: -5px;
 }
 
 .newsletter-form input[type="email"] {
