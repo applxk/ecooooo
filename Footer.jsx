@@ -1,12 +1,12 @@
 import React from 'react';
-import { MDBFooter, MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import './footer.css';
 
 export default function App() {
     return (
-        <MDBFooter className='footer-container'>
-            <MDBContainer className='mt-5'>
-                <MDBRow className='mt-3 footer-content'>
-                    <MDBCol md='3' className='col1'>
+        <footer className='footer-container'>
+            <div>
+                <div className='footer-content'>
+                    <div className='col1'>
                         <h6 className='section-title'>Overview</h6>
                         <a href='#!' className='text-reset'>
                             About Us
@@ -23,9 +23,9 @@ export default function App() {
                         <a href='#!' className='text-reset'>
                             Contact Us
                         </a>
-                    </MDBCol>
+                    </div>
 
-                    <MDBCol md='3' className='col2'>
+                    <div className='col2'>
                         <h6 className='section-title'>Help & FAQs</h6>
                         <a href='/faq' className='text-reset'>
                             FAQs
@@ -39,12 +39,12 @@ export default function App() {
                         <a href='#!' className='text-reset'>
                             Terms & Conditions
                         </a>
-                    </MDBCol>
+                    </div>
 
-                    <MDBCol md='6' className='col3'>
+                    <div className='col3'>
                         <h6 className='section-title'>Subscribe to learn more:</h6>
                         <p className='contact'>
-                            Be the first to get the latest news of events and workshop from us!
+                            Be the first to get the latest news of events and workshops from us!
                         </p>
 
                         <div className="newsletter-form">
@@ -58,15 +58,15 @@ export default function App() {
 
                         <h6 className='section-title'>Connect with us!</h6>
                         <p className='social'>
-                            <a href='https://www.facebook.com/MSEsingapore/' target="_blank"><img src='./src/assets/images/facebook.png' alt='facebook'></img></a>
-                            <a href='https://www.instagram.com/msesingapore/' target="_blank"><img src='./src/assets/images/instagram.png' alt='instagram'></img></a>
+                            <a href='https://www.facebook.com/MSEsingapore/' target="_blank" rel="noopener noreferrer"><img src='./src/assets/images/facebook.png' alt='facebook' /></a>
+                            <a href='https://www.instagram.com/msesingapore/' target="_blank" rel="noopener noreferrer"><img src='./src/assets/images/instagram.png' alt='instagram' /></a>
                         </p>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
+                    </div>
+                </div>
+            </div>
             <div className='copyright-text'>
                 © 2024 EcoHaven. All rights Reserved
             </div>
-        </MDBFooter>
+        </footer>
     );
 }
