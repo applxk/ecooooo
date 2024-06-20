@@ -20,7 +20,7 @@ const DataTable = () => {
   const [file, setFile] = useState(null);
   const [productDetail, setProductDetail] = useState(null);
   const [errorAdding, setErrorAdding] = useState('');
-  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null); // State for delete confirmation
 
   const [alertType, setAlertType] = useState('success'); // success, info, warning, error
   const [alertMessage, setAlertMessage] = useState('');
@@ -173,9 +173,6 @@ const DataTable = () => {
   };
 
   const handleDelete = async (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this product?');
-    if (!confirmed) return;
-
     try {
       await axios.delete(`http://localhost:3001/eco/product-detail/${id}`);
       setRows(rows.filter(row => row.id !== id));
@@ -213,7 +210,7 @@ const DataTable = () => {
       width: 130,
       renderCell: (params) => (
         <div>
-          <DeleteIcon style={{ cursor: 'pointer', color: 'red'}} onClick={() => handleDelete(params.row.id)} />
+          <DeleteIcon style={{ cursor: 'pointer', color: 'red'}} onClick={() => setDeleteConfirmation(params.row.id)} />
         </div>
       ),
     },
@@ -239,6 +236,20 @@ const DataTable = () => {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
+  };
+
+  const deleteModalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    minWidth: 300,
+    maxWidth: 500,
+    width: '50%',
+    textAlign: 'center',
   };
 
   return (
@@ -319,6 +330,19 @@ const DataTable = () => {
           </Box>
         </Modal>
       )}
+      {/* Delete Confirmation Modal */}
+      <Modal open={deleteConfirmation !== null} onClose={() => setDeleteConfirmation(null)}>
+        <Box sx={deleteModalStyle}>
+          <h2 className='popup'>Delete Confirmation</h2>
+          <p>Are you sure you want to delete this product?</p>
+          <Button variant="contained" className='deletebutton' onClick={() => { handleDelete(deleteConfirmation); setDeleteConfirmation(null); }}>
+            Delete
+          </Button>
+          <Button variant="contained" className='cancelbutton' onClick={() => setDeleteConfirmation(null)}>
+            Cancel
+          </Button>
+        </Box>
+      </Modal>
     </div>
   );
 };
