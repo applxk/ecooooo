@@ -5,9 +5,8 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
 import axios from 'axios';
-
+import { Alert, AlertTitle } from '@mui/material';
 import '../../assets/styles/rewardproduct.css';
 import Sidebar from '../../components/sidebar';
 
@@ -23,9 +22,25 @@ const DataTable = () => {
   const [errorAdding, setErrorAdding] = useState('');
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
+  const [alertType, setAlertType] = useState('success'); // success, info, warning, error
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
+
   useEffect(() => {
     fetchRows();
   }, []);
+
+  useEffect(() => {
+    if (alertOpen) {
+      const timer = setTimeout(() => {
+        handleCloseAlert();
+      }, 5000); // Set timeout for 5 seconds
+
+      return () => {
+        clearTimeout(timer); // Clean up timer on unmount or re-render
+      };
+    }
+  }, [alertOpen]);
 
   const fetchRows = async () => {
     try {
@@ -90,6 +105,16 @@ const DataTable = () => {
     setFile(e.target.files[0]);
   };
 
+  const handleCloseAlert = () => {
+    setAlertOpen(false);
+  };
+
+  const handleShowAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
+    setAlertOpen(true);
+  };
+
   const handleSaveAdd = async () => {
     const formData = new FormData();
     formData.append('file', file);
@@ -108,7 +133,7 @@ const DataTable = () => {
       if (response.status === 201) {
         setRows([...rows, response.data]);
         handleCloseAdd();
-        window.alert('Product added successfully!');
+        handleShowAlert('success', 'Product added successfully!');
       } else {
         setErrorAdding('Error adding product. Please try again.');
       }
@@ -138,7 +163,7 @@ const DataTable = () => {
         const updatedRows = rows.map(row => (row.id === updatedProduct.id ? updatedProduct : row));
         setRows(updatedRows);
         handleCloseEdit();
-        window.alert('Product updated successfully!');
+        handleShowAlert('success', 'Product updated successfully!');
       } else {
         console.error('Invalid response from the server');
       }
@@ -154,7 +179,7 @@ const DataTable = () => {
     try {
       await axios.delete(`http://localhost:3001/eco/product-detail/${id}`);
       setRows(rows.filter(row => row.id !== id));
-      window.alert('Product deleted successfully!');
+      handleShowAlert('success', 'Product deleted successfully!');
     } catch (error) {
       console.error('Error deleting product:', error);
     }
@@ -178,7 +203,7 @@ const DataTable = () => {
         <div>
           <Button variant="contained" className='editbutton' onClick={() => handleOpenEdit(params.row)}>
             Edit
-            </Button>
+          </Button>
         </div>
       ),
     },
@@ -200,11 +225,21 @@ const DataTable = () => {
         <div>
           <Button variant="contained" className="viewbutton" onClick={() => handleViewDetail(params.row.id)}>
             View Details
-            </Button>
+          </Button>
         </div>
       ),
     },
   ];
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <div className="rewardshopback">
@@ -215,6 +250,14 @@ const DataTable = () => {
       <div className='header'>
         <h2>Redemption Shop</h2>
       </div>
+
+      {/* Alert Component for displaying messages */}
+      {alertOpen && (
+        <Alert severity={alertType} onClose={handleCloseAlert} sx={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '50%' }}>
+          <AlertTitle>{alertType === 'success' ? 'Success' : alertType === 'info' ? 'Info' : alertType === 'warning' ? 'Warning' : 'Error'}</AlertTitle>
+          {alertMessage}
+        </Alert>
+      )}
 
       <div>
         <DataGrid
@@ -281,13 +324,3 @@ const DataTable = () => {
 };
 
 export default DataTable;
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
