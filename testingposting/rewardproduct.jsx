@@ -5,8 +5,11 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+
 import axios from 'axios';
+
 import '../../assets/styles/rewardproduct.css';
+import Sidebar from '../../components/sidebar';
 
 const DataTable = () => {
   const [rows, setRows] = useState([]);
@@ -173,7 +176,9 @@ const DataTable = () => {
       width: 130,
       renderCell: (params) => (
         <div>
-          <Button variant="contained" onClick={() => handleOpenEdit(params.row)}>Edit</Button>
+          <Button variant="contained" className='editbutton' onClick={() => handleOpenEdit(params.row)}>
+            Edit
+            </Button>
         </div>
       ),
     },
@@ -183,7 +188,7 @@ const DataTable = () => {
       width: 130,
       renderCell: (params) => (
         <div>
-          <DeleteIcon style={{ cursor: 'pointer' }} onClick={() => handleDelete(params.row.id)} />
+          <DeleteIcon style={{ cursor: 'pointer', color: 'red'}} onClick={() => handleDelete(params.row.id)} />
         </div>
       ),
     },
@@ -193,7 +198,9 @@ const DataTable = () => {
       width: 150,
       renderCell: (params) => (
         <div>
-          <Button variant="contained" onClick={() => handleViewDetail(params.row.id)}>View Details</Button>
+          <Button variant="contained" className="viewbutton" onClick={() => handleViewDetail(params.row.id)}>
+            View Details
+            </Button>
         </div>
       ),
     },
@@ -201,30 +208,40 @@ const DataTable = () => {
 
   return (
     <div className="rewardshopback">
-      <div style={{ height: 400, width: '100%' }}>
+
+      {/* sidebar */}
+      <Sidebar />
+
+      <div className='header'>
+        <h2>Redemption Shop</h2>
+      </div>
+
+      <div>
         <DataGrid
           rows={rows}
           columns={columns}
           getRowId={(row) => row.id} // Ensure each row has a unique id
           pageSize={5}
           checkboxSelection
+          className="data-grid"
         />
       </div>
-      <Button variant="contained" color="primary" onClick={handleOpenAdd} style={{ marginTop: '10px' }}>
+      <Button variant="contained" onClick={handleOpenAdd} className='addnewproductbutton'>
         Add New Product
       </Button>
       <Modal open={openAdd} onClose={handleCloseAdd}>
         <Box sx={{ ...style, width: 400 }}>
-          <h2>Add New Product</h2>
+          <h2 className='popup'>Add New Product</h2>
+          <hr></hr>
           <TextField fullWidth margin="normal" label="Product Name" name="prodName" value={formValues.prodName} onChange={handleInputChange} />
           <TextField fullWidth margin="normal" label="Leaves" name="leaves" type="number" value={formValues.leaves} onChange={handleInputChange} />
           <TextField fullWidth margin="normal" label="Stock" name="stock" type="number" value={formValues.stock} onChange={handleInputChange} />
           <TextField fullWidth margin="normal" label="SKU" name="sku" value={formValues.sku} onChange={handleInputChange} />
           <input type="file" onChange={handleFileChange} /> {/* Add file input */}
-          <Button variant="contained" color="primary" onClick={handleSaveAdd} style={{ marginTop: '10px', marginRight: '10px' }}>
+          <Button variant="contained" onClick={handleSaveAdd} className='addbutton'>
             Add
           </Button>
-          <Button variant="contained" color="secondary" onClick={handleCloseAdd} style={{ marginTop: '10px' }}>
+          <Button variant="contained" onClick={handleCloseAdd} className='cancelbutton'>
             Cancel
           </Button>
           {errorAdding && <p style={{ color: 'red' }}>{errorAdding}</p>}
@@ -232,16 +249,17 @@ const DataTable = () => {
       </Modal>
       <Modal open={openEdit} onClose={handleCloseEdit}>
         <Box sx={{ ...style, width: 400 }}>
-          <h2>Edit Product</h2>
+          <h2 className='popup'>Edit Product</h2>
+          <hr></hr>
           <TextField fullWidth margin="normal" label="Product Name" name="prodName" value={formValues.prodName} onChange={handleInputChange} />
           <TextField fullWidth margin="normal" label="Leaves" name="leaves" type="number" value={formValues.leaves} onChange={handleInputChange} />
           <TextField fullWidth margin="normal" label="Stock" name="stock" type="number" value={formValues.stock} onChange={handleInputChange} />
           <TextField fullWidth margin="normal" label="SKU" name="sku" value={formValues.sku} onChange={handleInputChange} />
           <input type="file" onChange={handleFileChange} /> {/* Add file input */}
-          <Button variant="contained" color="primary" onClick={handleSaveEdit} style={{ marginTop: '10px', marginRight: '10px' }}>
+          <Button variant="contained" className='savebutton' onClick={handleSaveEdit} style={{ marginTop: '10px', marginRight: '10px' }}>
             Save Changes
           </Button>
-          <Button variant="contained" color="secondary" onClick={handleCloseEdit} style={{ marginTop: '10px' }}>
+          <Button variant="contained" className='cancelbutton' onClick={handleCloseEdit} style={{ marginTop: '10px' }}>
             Cancel
           </Button>
         </Box>
