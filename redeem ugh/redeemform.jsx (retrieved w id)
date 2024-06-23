@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios'; // Import axios here
 import '../../assets/styles/redeemform.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/footer';
@@ -41,16 +40,17 @@ const validationSchema = Yup.object({
 
 function RedeemForm() {
     const { productId } = useParams();
-    const [product, setProduct] = useState(null); // State to hold product details
+    const [product, setProduct] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
         // Fetch product details based on productId
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/eco/product-detail/${productId}`);
-                if (response.data) {
-                    setProduct(response.data);
+                const response = await fetch(`http://localhost:3001/eco/product-detail/${productId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setProduct(data);
                 } else {
                     console.error('Product not found');
                 }
@@ -70,24 +70,24 @@ function RedeemForm() {
         }
     }, [isSubmitted]);
 
+    const generateCollectionId = () => {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+    };
+
     return (
         <div className='redeemform'>
-            {/* Navbar */}
             <Navbar />
 
-            {/* banner */}
             <div className="headbanner">
                 <img src="/images/banner.png" alt="Banner" />
                 <h1>Redeem Form</h1>
             </div>
 
-            {/* back */}
             <div className="back">
                 <img src="/images/icons/back.png" alt="back" />
                 <p><a href='/redemptionshop'>back to redemption shop</a></p>
             </div>
 
-            {/* form */}
             <div className="form-section">
                 <h2 className='info'>Information</h2>
                 {product && (
@@ -95,43 +95,40 @@ function RedeemForm() {
                         initialValues={{ name: '', phoneNumber: '', email: '' }}
                         validationSchema={validationSchema}
                         onSubmit={(values, { setSubmitting }) => {
-                            setTimeout(() => {
-                                setIsSubmitted(true);
-                                setSubmitting(false);
-                            }, 400);
+                            const collectionId = generateCollectionId();
+                            
+                            // Save collection ID to localStorage
+                            localStorage.setItem('collectionId', collectionId);
+
+                            setIsSubmitted(true);
+                            setSubmitting(false);
                         }}
                     >
                         {({ errors }) => (
                             <Form>
-
-                                {/* Display product name and leaves */}
                                 <div className='product'>
-                                <p>Product Name: {product.prodName}</p>
-                                <p>Leaves: {product.leaves}</p>
+                                    <p>Product Name: {product.prodName}</p>
+                                    <p>Leaves: {product.leaves}</p>
                                 </div>
 
-                                {/* name */}
                                 <FormControl fullWidth>
                                     <Label>Name <span className='asterisk'>*</span></Label>
                                     <Field name="name" as={StyledInput} placeholder="Name" />
                                     <ErrorMessage name="name" component="div" className="error-message" />
                                 </FormControl>
 
-                                {/* phone number */}
                                 <FormControl fullWidth>
                                     <Label>Phone Number <span className='asterisk'>*</span></Label>
                                     <Field name="phoneNumber" as={StyledInput} placeholder="Phone number" />
                                     <ErrorMessage name="phoneNumber" component="div" className="error-message" />
                                 </FormControl>
 
-                                {/* email */}
                                 <FormControl fullWidth>
                                     <Label>Email <span className='asterisk'>*</span></Label>
                                     <Field name="email" as={StyledInput} placeholder="Email" />
                                     <ErrorMessage name="email" component="div" className="error-message" />
                                 </FormControl>
-                                
-                                {/* detail */}
+
                                 <div className='detail'>
                                     <h2>Please remember the collection details</h2>
                                     <p>Potong Pasir Community Club</p>
@@ -141,7 +138,6 @@ function RedeemForm() {
                                     <p className='extra'>*please collect within a week</p>
                                 </div>
 
-                                {/* submit */}
                                 <button type="submit" className='submitbutton'>
                                     Redeem now
                                 </button>
@@ -151,7 +147,6 @@ function RedeemForm() {
                 )}
             </div>
 
-            {/* Footer */}
             <Footer />
         </div>
     );
