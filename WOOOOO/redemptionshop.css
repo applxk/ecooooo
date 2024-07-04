@@ -1,0 +1,151 @@
+/* banner */
+.headbanner {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.headbanner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 250px;
+}
+
+.headbanner h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* balance */
+.total {
+    color: #14772B;
+}
+
+.balance p {
+    text-align: center;
+}
+
+/* divider */
+.divider {
+    margin: 20px auto;
+    border: none;
+    border-top: 5px solid #14772B;
+    width: 80%;
+}
+
+/* shop */
+.shop {
+    margin-bottom: 50px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.product-item {
+    flex: 0 1 calc(33.333% - 20px); /* Adjust width to fit 3 items in a line with some spacing */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.product-item h2 {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.product-item p {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.product-item img {
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    border: 5px solid #14772B;
+}
+
+/* button */
+.redeembutton {
+    margin-left: 130px;
+    background-color: #14772B;
+    padding: 14px 20px;
+    font-size: 15px;
+    border-radius: 15px;
+    border: none;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.redeembutton a {
+    color: white;
+    text-decoration: none;
+}
+
+.redeembutton:hover {
+    background-color: #45a049;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .headbanner h1 {
+        width: 90%;
+        font-size: 6vw;
+    }
+
+    .balance h1 {
+        font-size: 5vw;
+        width: 90%;
+    }
+
+    .shop h1 {
+        width: 90%;
+        font-size: 5vw;
+    }
+
+    .products {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .product-item {
+        margin: 10px;
+        flex: 1 1 90%;
+        max-width: 300px;
+    }
+
+    .product-item img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+    }
+
+    .product-item h2 {
+        font-size: 4vw;
+    }
+
+    .product-item p {
+        font-size: 3vw;
+    }
+
+    .redeembutton {
+        font-size: 3.5vw;
+        padding: 8px 16px;
+    }
+    
+}
