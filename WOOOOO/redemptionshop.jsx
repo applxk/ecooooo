@@ -3,20 +3,24 @@ import '../../assets/styles/redemptionshop.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/footer';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 
 function RedemptionShop() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]); // store list of products
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
+  // fetch from API
   const fetchProducts = async () => {
     try {
+      
+      // get request to fetch product details
       const response = await axios.get('http://localhost:3001/eco/product-detail');
       if (Array.isArray(response.data)) {
-        // Sort products based on leaves ascending
+
+        // sort in ascending of leaves
         const sortedProducts = response.data.sort((a, b) => a.leaves - b.leaves);
         setProducts(sortedProducts);
       } else {
@@ -41,7 +45,7 @@ function RedemptionShop() {
       {/* balance */}
       <div className='balance'>
         <h1>Your balance:</h1>
-        <h1><span className='total'>150</span> leaves</h1> {/* link w backend and user acc */}
+        <h1><span className='total'>150</span> leaves</h1> {/* link w backend and user acc later on*/}
         <p>View leaves summary</p>
       </div>
 
@@ -57,8 +61,7 @@ function RedemptionShop() {
               <h2>{product.prodName}</h2>
               <img src={`http://localhost:3001/eco/product-images/${product.prodimg}`} alt={product.prodName} className='product-image' />
               <p>Leaves: {product.leaves}</p>
-              {/* Use Link to pass product ID as URL parameter */}
-              <Link to={`/redeemform/${product.id}`} className='redeembutton'>Redeem</Link>
+              <Link to={`/redeemform/${product.id}`} state={{ product }} className='redeembutton'>Redeem</Link>
             </div>
           ))}
         </div>
